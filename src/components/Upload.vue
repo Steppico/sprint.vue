@@ -1,6 +1,8 @@
 <template>
   <div>
-    <input type="file" v-on:change="eventHandler" />
+    <button v-on:click="maybeThisIsAnEvent">
+      <input v-on:change="eventHandler" id="inn_put" type="file" />Upload Here!
+    </button>
   </div>
 </template>
 
@@ -13,6 +15,9 @@ export default {
   methods: {
     eventHandler(e) {
       this.saveobject(e.target.files[0]);
+    },
+    maybeThisIsAnEvent() {
+      document.getElementById("inn_put").click();
     }
   }
 };
@@ -21,6 +26,8 @@ export default {
 <style>
 input {
   color: black;
+  position: absolute;
+  left: 99999999px;
   background-color: yellow;
 }
 </style>

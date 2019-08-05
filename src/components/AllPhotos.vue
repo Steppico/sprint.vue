@@ -17,11 +17,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 img {
   width: 100px;
   height: 100px;
   padding: 3px;
   border-radius: 50%;
+}
+img:hover {
+  transform: scale(1.1, 1.1);
+  cursor: zoom-in;
 }
 </style>
