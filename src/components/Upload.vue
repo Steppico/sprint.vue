@@ -1,11 +1,26 @@
 <template>
-  <div />
+  <div>
+    <input type="file" v-on:change="eventHandler" />
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Upload"
+  name: "Upload",
+  props: {
+    saveobject: Function
+  },
+  methods: {
+    eventHandler(e) {
+      this.saveobject(e.target.files[0]);
+    }
+  }
 };
 </script>
 
-<style></style>
+<style>
+input {
+  color: black;
+  background-color: yellow;
+}
+</style>

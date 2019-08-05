@@ -1,24 +1,24 @@
 /* global AWS */
 const bucketName = "react.sprint";
 const identityPoolId = "ap-northeast-1:131db146-e5b9-4f7b-8b58-d0c59e2deeaf";
-
+const AWS = require("aws-sdk");
 // students: ap-northeast-1:131db146-e5b9-4f7b-8b58-d0c59e2deeaf
 AWS.config.update({
   region: "ap-northeast-1",
   credentials: new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: identityPoolId,
-  }),
+    IdentityPoolId: identityPoolId
+  })
 });
 
 const bucket = new AWS.S3({
   params: {
-    Bucket: bucketName,
-  },
+    Bucket: bucketName
+  }
 });
 
 export function listObjects() {
   console.log("listing objects");
-  const listObjects = new Promise((resolve) => {
+  const listObjects = new Promise(resolve => {
     bucket.listObjects((error, data) => {
       if (error) {
         console.error("error: ", error);
@@ -33,11 +33,11 @@ export function listObjects() {
 }
 
 export function getSingleObject(key) {
-  const getSingleObject = new Promise((resolve) => {
+  const getSingleObject = new Promise(resolve => {
     bucket.getObject(
       {
         Bucket: bucketName,
-        Key: key,
+        Key: key
       },
       (error, data) => {
         if (error) {
@@ -54,12 +54,12 @@ export function getSingleObject(key) {
 }
 
 export function saveObject(file) {
-  const saveObject = new Promise((resolve) => {
+  const saveObject = new Promise(resolve => {
     bucket.putObject(
       {
         Key: file.name,
         Body: file,
-        ACL: "public-read",
+        ACL: "public-read"
       },
       (error, data) => {
         if (error) {
