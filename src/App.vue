@@ -2,9 +2,9 @@
   <div id="app">
     <img id="logo" alt="SnS logo" src="./SS-Logo.jpg" />
     <h1>{{ title }}</h1>
-    <navbar v-bind:changevue="changeVue" v-bind:saveobject="saveobject" />
-    <allphotos v-if="currentView==='AllPhotos'" />
-    <singlephoto v-if="currentView==='SinglePhoto'" />
+    <navbar />
+    <allphotos v-if="$store.state.currentView==='AllPhotos'" />
+    <singlephoto v-if="$store.state.currentView==='SinglePhoto'" />
   </div>
 </template>
 
@@ -12,8 +12,6 @@
 import Navbar from "./components/Navbar";
 import AllPhotos from "./components/AllPhotos";
 import SinglePhoto from "./components/SinglePhoto";
-import { listObjects, getSingleObject, saveObject } from "../utils/index";
-import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -24,29 +22,11 @@ export default {
     upload: true
   },
   data: () => ({
-    title: "The Magnificent App from Stefcott",
-    saveobject: saveObject
+    title: "The Magnificent App from Stefcott"
   }),
-  computed: mapState(["currentView", "photos", "selectedPhoto"]),
-
-  methods: {
-    changeVue(photo) {
-      if (typeof photo === "object") {
-        this.currentView = "AllPhotos";
-        return;
-      }
-      this.currentView =
-        this.currentView === "AllPhotos" ? "SinglePhoto" : "AllPhotos";
-      this.selectedPhoto = photo;
-    }
-  },
 
   created() {
-    listObjects().then(data =>
-      Promise.all(
-        data.slice(0, 50).map(imgData => getSingleObject(imgData.Key))
-      ).then(imgimg => this.photos.push(imgimg))
-    );
+    this.$store.dispatch("download");
   }
 };
 </script>

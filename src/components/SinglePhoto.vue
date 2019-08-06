@@ -1,25 +1,20 @@
 <template>
-  <img :src="'data:image/png;base64,' + selectedphoto" @click="changevue" />
+  <img
+    :src="'data:image/png;base64,' + $store.state.selectedPhoto"
+    @click="$store.commit('changeVue')"
+  />
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
-  name: "SinglePhoto",
-
-  props: {
-    changevue: Function,
-    selectedphoto: String
-  },
-  computed: mapState(["currentView", "photos", "selectedPhoto"])
+  name: "SinglePhoto"
 };
 </script>
 
 <style scoped>
 img {
   border-radius: 0%;
-  width: 100%;
+  width: auto;
   height: auto;
 }
 </style>

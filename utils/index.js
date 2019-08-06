@@ -1,4 +1,3 @@
-/* global AWS */
 const bucketName = "react.sprint";
 const identityPoolId = "ap-northeast-1:131db146-e5b9-4f7b-8b58-d0c59e2deeaf";
 const AWS = require("aws-sdk");

@@ -1,22 +1,17 @@
 <template>
   <div>
     <img
-      v-for="(photo, index) in photos[0]"
+      v-for="(photo, index) in $store.state.photos"
       :key="index"
       :src="'data:image/png;base64,' + photo"
-      @click="changevue(photo)"
+      @click="$store.commit('changeVue', photo)"
     />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
-console.log("helloooooo");
 export default {
-  name: "AllPhotos",
-  props: { changevue: Function },
-  computed: mapState(["currentView", "photos", "selectedPhoto"])
+  name: "AllPhotos"
 };
 </script>
 
