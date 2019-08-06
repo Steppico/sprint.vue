@@ -3,13 +3,16 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "SinglePhoto",
 
   props: {
     changevue: Function,
     selectedphoto: String
-  }
+  },
+  computed: mapState(["currentView", "photos", "selectedPhoto"])
 };
 </script>
 

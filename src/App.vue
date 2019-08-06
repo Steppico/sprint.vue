@@ -1,19 +1,10 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <img id="logo" alt="SnS logo" src="./SS-Logo.jpg" />
     <h1>{{ title }}</h1>
     <navbar v-bind:changevue="changeVue" v-bind:saveobject="saveobject" />
-    <allphotos
-      v-if="currentView==='AllPhotos'"
-      v-bind:photos="photos"
-      v-bind:changevue="changeVue"
-      v-bind:selectedphoto="selectedPhoto"
-    />
-    <singlephoto
-      v-if="currentView==='SinglePhoto'"
-      v-bind:changevue="changeVue"
-      v-bind:selectedphoto="selectedPhoto"
-    />
+    <allphotos v-if="currentView==='AllPhotos'" />
+    <singlephoto v-if="currentView==='SinglePhoto'" />
   </div>
 </template>
 
@@ -22,21 +13,21 @@ import Navbar from "./components/Navbar";
 import AllPhotos from "./components/AllPhotos";
 import SinglePhoto from "./components/SinglePhoto";
 import { listObjects, getSingleObject, saveObject } from "../utils/index";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
     navbar: Navbar,
     allphotos: AllPhotos,
-    singlephoto: SinglePhoto
+    singlephoto: SinglePhoto,
+    upload: true
   },
   data: () => ({
     title: "The Magnificent App from Stefcott",
-    currentView: "AllPhotos",
-    photos: [],
-    selectedPhoto: undefined,
     saveobject: saveObject
   }),
+  computed: mapState(["currentView", "photos", "selectedPhoto"]),
 
   methods: {
     changeVue(photo) {
@@ -63,5 +54,11 @@ export default {
 <style>
 #app {
   text-align: center;
+}
+</style>
+<style scoped>
+#logo {
+  width: 200px;
+  height: auto;
 }
 </style>

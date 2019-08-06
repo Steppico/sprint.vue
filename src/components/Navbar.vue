@@ -2,13 +2,14 @@
   <div id="navbar">
     <p
       @click="changevue"
-    >The Greatest App, from the extremely talented brain of Mr. Steppico and the smaller brain of Mr. Scott</p>
+    >The Greatest App, from the extremely talented brain of Mr. Steppico and the smaller but somehow useful brain of Mr. Scott</p>
     <upload v-bind:saveobject="saveobject" />
   </div>
 </template>
 
 <script>
 import Upload from "./Upload";
+import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
